@@ -4,6 +4,7 @@ import com.example.demo.model.UserStatus;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
+import org.springframework.test.context.TestPropertySource;
 import org.springframework.test.context.jdbc.Sql;
 
 import java.util.Optional;
@@ -12,6 +13,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 @DataJpaTest(showSql = true)
 @Sql("/sql/user-repository-test-data.sql")
+@TestPropertySource("classpath:test-application.properties")
 public class UserRepositoryTest {
     @Autowired
     private UserRepository userRepository;
