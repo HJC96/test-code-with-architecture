@@ -10,6 +10,10 @@ import org.springframework.test.context.TestPropertySource;
 import org.springframework.test.context.jdbc.Sql;
 import org.springframework.test.context.jdbc.SqlGroup;
 
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
+
 import static org.assertj.core.api.Assertions.assertThat;
 
 @SpringBootTest
@@ -27,7 +31,6 @@ public class PostServiceTest {
         //given
         //when
         PostEntity result = postService.getById(1L);
-
         //then
         assertThat(result.getContent()).isEqualTo("helloworld");
         assertThat(result.getWriter().getEmail()).isEqualTo("gkswlcjs2@naver.com");

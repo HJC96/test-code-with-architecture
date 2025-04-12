@@ -158,4 +158,7 @@ public class UserServiceTest {
         }
         ).isInstanceOf(CertificationCodeNotMatchedException.class);
     }
+
+
+
 }
