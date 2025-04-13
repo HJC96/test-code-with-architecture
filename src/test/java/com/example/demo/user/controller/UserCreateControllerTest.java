@@ -59,9 +59,5 @@ public class UserCreateControllerTest {
                 .andExpect(jsonPath("$.email").value("gkswlcjs2@naver.com"))
                 .andExpect(jsonPath("$.nickname").value("gkswlcjs2"))
                 .andExpect(jsonPath("$.status").value("PENDING"));
-
-
     }
-
-
 }
