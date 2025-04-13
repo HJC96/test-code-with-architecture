@@ -45,7 +45,7 @@ public class UserControllerTest {
         // given
         // when
         // then
-        mockMvc.perform(get("/api/users/1"))
+         mockMvc.perform(get("/api/users/1"))
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$.id").value(1))
                 .andExpect(jsonPath("$.email").value("gkswlcjs2@naver.com"))
