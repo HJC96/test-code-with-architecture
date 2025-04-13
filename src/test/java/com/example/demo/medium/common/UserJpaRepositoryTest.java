@@ -1,6 +1,7 @@
-package com.example.demo.user.infrastructure;
+package com.example.demo.medium.common;
 
 import com.example.demo.user.domain.UserStatus;
+import com.example.demo.user.infrastructure.UserEntity;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
@@ -16,7 +17,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 @TestPropertySource("classpath:test-application.properties")
 public class UserJpaRepositoryTest {
     @Autowired
-    private UserJpaRepository UserJpaRepository;
+    private com.example.demo.user.infrastructure.UserJpaRepository UserJpaRepository;
 
 /*    @Test
     void UserRepository_가_제대로_연결되었다(){
