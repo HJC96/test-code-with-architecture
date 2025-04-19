@@ -5,7 +5,6 @@ import com.example.demo.common.domain.exception.ResourceNotFoundException;
 import com.example.demo.common.service.port.ClockHolder;
 import com.example.demo.mock.TestClockHolder;
 import com.example.demo.mock.TestContainer;
-import com.example.demo.user.controller.port.UserReadService;
 import com.example.demo.user.controller.port.UserService;
 import com.example.demo.user.controller.response.MyProfileResponse;
 import com.example.demo.user.controller.response.UserResponse;

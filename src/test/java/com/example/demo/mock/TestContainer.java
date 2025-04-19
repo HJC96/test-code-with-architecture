@@ -18,10 +18,6 @@ import lombok.Builder;
 
 public class TestContainer {
     public final MailSender mailSender;
-    public final UserReadService userReadService;
-    public final UserUpdateService userUpdateService;
-    public final UserCreateService userCreateService;
-    public final AuthenticationService authenticationService;
     public final PostService postService;
     public final UserRepository userRepository;
     public final PostRepository postRepository;
@@ -51,18 +47,11 @@ public class TestContainer {
                 .clockHolder(clockHolder)
                 .certificationService(new CertificationService(mailSender))
                 .build();
-        this.userReadService = userService;
-        this.userUpdateService = userService;
-        this.userCreateService = userService;
-        this.authenticationService = userService;
         this.userController = UserController.builder()
-                .userReadService(userReadService)
-                .userUpdateService(userUpdateService)
-                .userCreateService(userCreateService)
-                .authenticationService(authenticationService)
+                .userService(userService)
                 .build();
         this.userCreateController = UserCreateController.builder()
-                .userCreateService(userCreateService)
+                .userService(userService)
                 .build();
         this.postController = PostController.builder()
                 .postService(postService)
