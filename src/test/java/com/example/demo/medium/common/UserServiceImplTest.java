@@ -6,7 +6,7 @@ import com.example.demo.user.domain.User;
 import com.example.demo.user.domain.UserStatus;
 import com.example.demo.user.domain.UserCreate;
 import com.example.demo.user.domain.UserUpdate;
-import com.example.demo.user.service.UserService;
+import com.example.demo.user.service.UserServiceImpl;
 import org.junit.jupiter.api.Test;
 import org.mockito.BDDMockito;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -27,10 +27,10 @@ import static org.mockito.ArgumentMatchers.any;
     @Sql(value = "/sql/user-service-test-data.sql", executionPhase = Sql.ExecutionPhase.BEFORE_TEST_METHOD),
     @Sql(value = "/sql/delete-all-data.sql", executionPhase = Sql.ExecutionPhase.AFTER_TEST_METHOD)
 })
-public class UserServiceTest {
+public class UserServiceImplTest {
 
     @Autowired
-    private UserService userService;
+    private UserServiceImpl userServiceImpl;
 
     @MockBean
     private JavaMailSender mailSender;
@@ -42,7 +42,7 @@ public class UserServiceTest {
         String email = "gkswlcjs2@naver.com";
 
         //when
-        User result = userService.getByEmail(email);
+        User result = userServiceImpl.getByEmail(email);
 
         //then
         assertThat(result.getEmail()).isEqualTo(email);
@@ -56,7 +56,7 @@ public class UserServiceTest {
         //when
         //then
         assertThatThrownBy(()->{
-            User result = userService.getByEmail(email);
+            User result = userServiceImpl.getByEmail(email);
         }
         ).isInstanceOf(ResourceNotFoundException.class);
     }
@@ -67,7 +67,7 @@ public class UserServiceTest {
         String email = "gkswlcjs2@naver.com";
 
         //when
-        User result = userService.getById(1L);
+        User result = userServiceImpl.getById(1L);
 
         //then
         assertThat(result.getEmail()).isEqualTo(email);
@@ -79,7 +79,7 @@ public class UserServiceTest {
         //when
         //then
         assertThatThrownBy(()->{
-                    User result = userService.getById(2);
+                    User result = userServiceImpl.getById(2);
                 }
         ).isInstanceOf(ResourceNotFoundException.class);
     }
@@ -97,7 +97,7 @@ public class UserServiceTest {
 
 
         //when
-        User result = userService.create(userCreate);
+        User result = userServiceImpl.create(userCreate);
 
         //then
         assertThat(result.getId()).isNotNull();
@@ -117,10 +117,10 @@ public class UserServiceTest {
 
 
         //when
-        userService.update(1, userUpdate);
+        userServiceImpl.update(1, userUpdate);
 
         //then
-        User result = userService.getById(1L);
+        User result = userServiceImpl.getById(1L);
         assertThat(result.getId()).isNotNull();
         assertThat(result.getAddress()).isEqualTo("인천");
         assertThat(result.getNickname()).isEqualTo("gkswlcjs2-n");
@@ -130,10 +130,10 @@ public class UserServiceTest {
     void user를_로그인_시키면_마지막_로그인_시간이_변경된다(){
         //given
         //when
-        userService.login(1L);
+        userServiceImpl.login(1L);
 
         //then
-        User userEntity = userService.getById(1L);
+        User userEntity = userServiceImpl.getById(1L);
         assertThat(userEntity.getLastLoginAt()).isGreaterThan(0L);
 //        assertThat(userEntity.getLastLoginAt()).isEqualTo(""T_T); //FIXME
     }
@@ -142,10 +142,10 @@ public class UserServiceTest {
     void PENDING_상태의_사용자는_인증_코드로_ACTIVE_시킬_수_있다(){
         //given
         //when
-        userService.verifyEmail(2, "aaaaaaaaaa-aaaa-aaaa-aaaa-aaaaaaaaaaab");
+        userServiceImpl.verifyEmail(2, "aaaaaaaaaa-aaaa-aaaa-aaaa-aaaaaaaaaaab");
 
         //then
-        User userEntity = userService.getById(2);
+        User userEntity = userServiceImpl.getById(2);
         assertThat(userEntity.getStatus()).isEqualTo(UserStatus.ACTIVE);
     }
 
@@ -155,7 +155,7 @@ public class UserServiceTest {
         //when
         //then
         assertThatThrownBy(()->{
-            userService.verifyEmail(2, "aaaaaaaaaa-aaaa-aaaa-aaaa-aaaaaaaaaaac");
+            userServiceImpl.verifyEmail(2, "aaaaaaaaaa-aaaa-aaaa-aaaa-aaaaaaaaaaac");
         }
         ).isInstanceOf(CertificationCodeNotMatchedException.class);
     }

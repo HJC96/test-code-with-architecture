@@ -4,6 +4,7 @@ import com.example.demo.common.domain.exception.CertificationCodeNotMatchedExcep
 import com.example.demo.common.domain.exception.ResourceNotFoundException;
 import com.example.demo.common.service.port.ClockHolder;
 import com.example.demo.common.service.port.UuidHolder;
+import com.example.demo.user.controller.port.*;
 import com.example.demo.user.domain.User;
 import com.example.demo.user.domain.UserStatus;
 import com.example.demo.user.domain.UserCreate;
@@ -14,13 +15,10 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.time.Clock;
-import java.util.UUID;
-
 @Service
 @RequiredArgsConstructor
 @Builder
-public class UserService {
+public class UserServiceImpl implements UserReadService, UserCreateService, UserUpdateService, AuthenticationService, UserService {
 
     private final UserRepository userRepository;
     private final CertificationService certificationService;

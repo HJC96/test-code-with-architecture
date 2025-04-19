@@ -16,7 +16,7 @@ public class FakeUserRepository implements UserRepository {
     private final List<User> data = Collections.synchronizedList(new ArrayList<>());
     */
 
-    private Long autoGenerateId = 0L;
+    private Long autoGenerateId = 1L;
     private List<User> data = new ArrayList<>();
 
 
