@@ -3,7 +3,7 @@ package com.example.demo.medium.common;
 import com.example.demo.post.domain.Post;
 import com.example.demo.post.domain.PostCreate;
 import com.example.demo.post.domain.PostUpdate;
-import com.example.demo.post.service.PostService;
+import com.example.demo.post.service.PostServiceImpl;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -19,15 +19,15 @@ import static org.assertj.core.api.Assertions.assertThat;
         @Sql(value = "/sql/post-service-test-data.sql", executionPhase = Sql.ExecutionPhase.BEFORE_TEST_METHOD),
         @Sql(value = "/sql/delete-all-data.sql", executionPhase = Sql.ExecutionPhase.AFTER_TEST_METHOD)
 })
-public class PostServiceTest {
+public class PostServiceImplTest {
     @Autowired
-    private PostService postService;
+    private PostServiceImpl postServiceImpl;
 
     @Test
     void getById는_존재하는_게시물을_내려준다() {
         //given
         //when
-        Post result = postService.getById(1L);
+        Post result = postServiceImpl.getById(1L);
         //then
         assertThat(result.getContent()).isEqualTo("helloworld");
         assertThat(result.getWriter().getEmail()).isEqualTo("gkswlcjs2@naver.com");
@@ -42,7 +42,7 @@ public class PostServiceTest {
                 .build();
 
         //when
-        Post result = postService.create(postCreate);
+        Post result = postServiceImpl.create(postCreate);
 
         //then
         assertThat(result.getId()).isNotNull();
@@ -58,10 +58,10 @@ public class PostServiceTest {
                 .content("hello world :)")
                 .build();
         //whe n
-        postService.update(1L, postUpdate);
+        postServiceImpl.update(1L, postUpdate);
 
         //then
-        Post result = postService.getById(1L);
+        Post result = postServiceImpl.getById(1L);
         assertThat(result.getContent()).isEqualTo("hello world :)");
         assertThat(result.getModifiedAt()).isGreaterThan(0);
     }

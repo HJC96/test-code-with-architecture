@@ -3,10 +3,7 @@ package com.example.demo.post.domain;
 import com.example.demo.mock.TestClockHolder;
 import com.example.demo.user.domain.User;
 import com.example.demo.user.domain.UserStatus;
-import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
-
-import java.util.UUID;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
